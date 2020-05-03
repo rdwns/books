@@ -1,0 +1,30 @@
+<title>{{ title }} </title>
+
+{% with messages = get_flashed_messages()  %}
+{% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+{% endif %}
+{% endwith %}
+
+{% block header %}
+<ul>
+    <li><a href="{{ url_for('main.index') }}">Home</a></li>
+    <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+    <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+
+
+</ul>
+{% endblock header %}
+
+
+
+{% block content %}
+{% endblock content %}
+
+{% block footer %}
+
+{% endblock footer %}
