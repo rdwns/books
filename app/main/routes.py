@@ -31,8 +31,10 @@ def import_csv():
     if form.validate_on_submit():
         f = form.csvfile.data
         filename = secure_filename(f.filename)
-        f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        flash('Uploaded Successfully!')
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        f.save(filepath)
+        Book.importbooks(filepath)
+        flash('Successfully imported')
     else:
         filename=None
     return render_template('import.html', form=form, filename=filename)
@@ -44,7 +46,7 @@ def import_csv():
 #         f = request.files['file']
 #         f.save(secure_filename(f.filename))
 
-#         Book.importbooks(f)
+#
 #         return 'File Upload Success'
 
 
