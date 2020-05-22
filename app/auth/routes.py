@@ -41,5 +41,8 @@ def signup():
 
 @bp.route('/logout', methods=['GET', 'POST'])
 def logout():
+    if current_user.is_anonymous:
+        return redirect(url_for('main.index'))
     logout_user()
-    return 'You have logged out succesfully!'
+    flash ('You have logged out successfully')
+    return redirect(url_for('main.index'))
