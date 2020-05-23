@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="" method="POST">
+
+    {{ form.hidden_tag() }}
+
+    <p>{{ form.isbn.label }}<br>
+        {{ form.isbn }}<br>
+        {% for error in form.isbn.errors  %}
+        [ {{ error }} ]
+        {% endfor %}
+    </p>
+
+    <p>{{ form.author.label }}<br>
+        {{ form.author }}<br>
+        {% for error in form.author.errors  %}
+        [ {{ error }} ]
+        {% endfor %}
+    </p>
+
+    <p>{{ form.title.label }}<br>
+        {{ form.title }}<br>
+        {% for error in form.title.errors  %}
+        [ {{ error }} ]
+        {% endfor %}
+    </p>
+
+    <p>{{ form.submit() }}</p>
+
+</form>
+<hr>
+
+{% for i in results  %}
+
+<ul>
+    <li>ISBN: {{ i.isbn }}</li>
+    <li>Author: {{ i.author }}</li>
+    <li>Title: {{ i.title }}</li>
+</ul>
+{% endfor %}
+<!-- {% for i in author  %}
+
+<ul>
+    <li>ISBN: {{ i.isbn }}</li>
+    <li>Author: {{ i.author }}</li>
+    <li>Title: {{ i.title }}</li>
+</ul>
+{% endfor %}
+{% for i in titles  %}
+
+<ul>
+    <li>ISBN: {{ i.isbn }}</li>
+    <li>Author: {{ i.author }}</li>
+    <li>Title: {{ i.title }}</li>
+</ul>
+
+
+
+{% endfor %} -->
+{% endblock content %}

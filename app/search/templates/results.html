@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% for i in isbn  %}
+
+<ul>
+    <li>ISBN: {{ isbn.isbn }}</li>
+    <li>Author: {{ isbn.author }}</li>
+    <li>Title: {{ isbn.title }}</li>
+</ul>
+
+{% endfor %}
+
+{% endblock content %}
