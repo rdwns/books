@@ -2,6 +2,32 @@
 
 {% block content %}
 
-this is book page
+<form action="" method="POST">
+    {{ form.hidden_tag() }}
+
+    <p>{{ form.review.label }}</p><br>
+    <p>{{ form.review }}
+    {% for error in form.review.errors  %}
+        [ {{ error }} ]
+        {% endfor %}
+    </p><br>
+    <p>{{ form.submit }}</p>
+
+</form>
+
+<hr>
+
+{{ bookTitle.title }}
+{{ stars }}
+
+{% for i in allReviews  %}
+
+<ul>
+    <li>{{ i.uid }}</li>
+    <li>{{ i.isbn }}</li>
+    <li>{{ i.review }}</li>
+</ul>
+
+{% endfor %}
 
 {% endblock content %}
