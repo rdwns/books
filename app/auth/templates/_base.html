@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} </title>
+    <link rel="stylesheet" href="static/base.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="login">
+          <p class="logo">bookr.</p>
+
+
+          {% with messages = get_flashed_messages()  %}
+            {% if messages %}
+
+            {% for message in messages %}
+            <div class="error-text">{{ message }}</div>
+            {% endfor %}
+
+
+            {% endif %}
+            {% endwith %}
+
+
+          {% block form %}
+          {% endblock form %}
+          </div>
+          </div>
+
+</body>
+</html>

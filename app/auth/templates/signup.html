@@ -1,45 +1,33 @@
-{% extends 'base.html' %}
+{% extends '_base.html' %}
 
-{% block content %}
+{% block form %}
 
-
-<h1>Register</h1>
 <form action="" method="post" novalidate>
     {{ form.hidden_tag() }}
-    <p>
-        {{ form.username.label }}<br>
-        {{ form.username(size=32) }}<br>
+
+        {{ form.username(size=32, class_="inputFields", placeholder="username") }}
         {% for error in form.username.errors  %}
-        [ {{ error }} ]
+        {{ error }}
         {% endfor %}
-    </p>
 
-    <p>
-        {{ form.email.label }}<br>
-        {{ form.email(size=120) }}<br>
+        {{ form.email(size=120, class_="inputFields", placeholder="email") }}
         {% for error in form.email.errors  %}
-        [ {{ error }} ]
+        {{ error }}
         {% endfor %}
-    </p>
 
 
-    <p>
-        {{ form.password.label }}<br>
-        {{ form.password(size=64) }}<br>
+        {{ form.password(size=64, class_="inputFields", placeholder="password") }}
         {% for error in form.password.errors  %}
-        [ {{ error }} ]
+        {{ error }}
         {% endfor %}
-    </p>
 
-    <p>
-        {{ form.password2.label }}<br>
-        {{ form.password2(size=64) }}<br>
-        {% for error in form.password2.errors  %}
-        [ {{ error }} ]
+        {{ form.password2(size=64, class_="inputFields", placeholder="confirm password") }}
+        {% for error in form.password.errors  %}
+        {{ error }}
         {% endfor %}
-    </p>
 
-    <p>{{ form.submit() }}</p>
+        {{ form.submit(class_="button") }}
+        <a id="new-user" href="{{ url_for('auth.login') }}">Existing User? Sign In</a>
 </form>
 
-{% endblock content %}
+{% endblock form %}
