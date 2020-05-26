@@ -14,7 +14,7 @@ def search():
     form = SearchForm()
     results = ''
     if form.validate_on_submit():
-        results = Book.query.filter(or_(Book.isbn==form.isbn.data, Book.author.contains(form.author.data), Book.title==form.title.data)).all()
+        results = Book.query.filter(or_(Book.isbn.contains(form.searchQuery.data), Book.author.contains(form.searchQuery.data), Book.title.contains(form.searchQuery.data))).all()
 
         if not results:
             flash('No entries found')

@@ -6,23 +6,9 @@
 
     {{ form.hidden_tag() }}
 
-    <p>{{ form.isbn.label }}<br>
-        {{ form.isbn }}<br>
-        {% for error in form.isbn.errors  %}
-        [ {{ error }} ]
-        {% endfor %}
-    </p>
-
-    <p>{{ form.author.label }}<br>
-        {{ form.author }}<br>
-        {% for error in form.author.errors  %}
-        [ {{ error }} ]
-        {% endfor %}
-    </p>
-
-    <p>{{ form.title.label }}<br>
-        {{ form.title }}<br>
-        {% for error in form.title.errors  %}
+    <p>{{ form.searchQuery.label }}<br>
+        {{ form.searchQuery }}<br>
+        {% for error in form.searchQuery.errors  %}
         [ {{ error }} ]
         {% endfor %}
     </p>

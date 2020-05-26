@@ -3,9 +3,8 @@ from wtforms import StringField, SubmitField
 from app.models import Book
 
 class SearchForm(FlaskForm):
-    isbn = StringField('ISBN')
-    author = StringField('Author')
-    title = StringField('Book Title')
+    searchQuery = StringField('Search Query')
+
     submit = SubmitField('Search')
 
 
