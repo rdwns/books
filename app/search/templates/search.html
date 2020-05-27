@@ -21,7 +21,12 @@
 
 {% block container %}
 
+
+
 <div class="main-container">
+  <div style="text-align: center;padding-bottom: 10px;">  <h2>Hi, {{ current_user.username }}</h2>
+    <p>Welcome to bookr. Please use the search bar above to search our database for your book!</p></div>
+
     <div class="cards">
         {% for i in results  %}
 

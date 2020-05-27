@@ -3,7 +3,7 @@ from flask_login import current_user, login_user, logout_user
 from werkzeug.utils import secure_filename
 from app.main import bp
 from sqlalchemy import and_
-from app.models import Book, Review
+from app.models import Book, Review, User
 from app.main.forms import ImportForm, ReviewForm
 import os, requests
 from app import db
@@ -16,7 +16,7 @@ def index():
         user='Stranger'
     else:
         user= current_user.username
-    return render_template('index.html', name=user)
+    return redirect(url_for('search.search'))
 
 @bp.route('/book/<isbn>', methods=['GET', 'POST'])
 def book(isbn):
@@ -36,8 +36,17 @@ def book(isbn):
             db.session.commit()
 
     book = Book.query.filter(Book.isbn==isbn).first()
-    allReviews = Review.query.filter(Review.isbn==isbn).all()
-    return render_template('book.html', form=form, allReviews=allReviews, book=book, stars=stars, ratingscount=ratingscount)
+    getReviews = Review.query.filter(Review.isbn==isbn).all()
+
+    reviews=[]
+
+    for i in getReviews:
+        singlereview = {}
+        reviewer = User.query.filter(User.id == i.uid).first()
+        singlereview.update({'number':i.id, 'user': reviewer.username, 'review': i.review})
+        reviews.append(singlereview)
+
+    return render_template('book.html', form=form, reviews=reviews, book=book, stars=stars, ratingscount=ratingscount)
 
 @bp.route('/user/<username>')
 def user(username):

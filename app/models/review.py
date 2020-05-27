@@ -9,4 +9,4 @@ class Review(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow())
 
     def __repr__(self):
-        return '<ISBN, Review {}{}>'.format(self.isbn, self.review)
+        return '<UID, Review {}{}>'.format(self.uid, self.review)

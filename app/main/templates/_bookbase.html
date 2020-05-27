@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ title }}</title>
+    <title>{{book.title}} - bookr.</title>
     <link rel="stylesheet" href="{{ url_for('main.static', filename='book.css') }}" />
   </head>
   <body>
     <div class="hero">
-      <div class="logo"> <a href="{{ url_for('main.index') }}"><p>bookr.</p></a></div>
-      <div class="logout"><a href="#">logout</a></div>
+      <div class="logo"> <a style='text-decoration: none;' href="{{ url_for('main.index') }}"><p>bookr.</p></a></div>
+      <div class="logout"><a href="{{ url_for('auth.logout') }}">logout</a></div>
     </div>
 
     {% block top %}
