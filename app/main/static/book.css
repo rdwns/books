@@ -8,7 +8,7 @@ body {
 .hero {
   display: flex;
   justify-content: space-between;
-  background: url("https://images.unsplash.com/photo-1511872638242-f1652016540e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
+  background: url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
