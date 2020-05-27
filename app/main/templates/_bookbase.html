@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('main.static', filename='book.css') }}" />
+  </head>
+  <body>
+    <div class="hero">
+      <div class="logo"> <a href="{{ url_for('main.index') }}"><p>bookr.</p></a></div>
+      <div class="logout"><a href="#">logout</a></div>
+    </div>
+
+    {% block top %}
+    {% endblock top %}
+
+    {% block mainCon %}
+    {% endblock mainCon %}
+  </body>
+</html>

@@ -1,33 +1,101 @@
-{% extends 'base.html' %}
+{% extends '_bookbase.html' %}
 
-{% block content %}
+{% block top %}
 
-<form action="" method="POST">
-    {{ form.hidden_tag() }}
 
-    <p>{{ form.review.label }}</p><br>
-    <p>{{ form.review }}
-    {% for error in form.review.errors  %}
-        [ {{ error }} ]
-        {% endfor %}
-    </p><br>
-    <p>{{ form.submit }}</p>
+<div class="top-container">
+    <div></div>
 
-</form>
+    <div class="top-bar">
+      <div id="cover-art">
+        <img src="http://covers.openlibrary.org/b/isbn/{{book.isbn}}-M.jpg" />
+      </div>
+      <div id="book-info">
+        <p class="book-title">{{ book.title }}</p>
+        <p class="labels">{{ book.author }}</p>
+        <p class="labels">{{ book.isbn }}</p>
+        <p class="labels">{{ book.year }}</p>
 
-<hr>
 
-{{ bookTitle.title }}
-{{ stars }}
 
-{% for i in allReviews  %}
+      </div>
+      <div id="rating">
+        <p class="rating-label">Rating</p>
+        <p class="rating">{{ stars }}</p>
+        <p class="num_rating">{{ ratingscount }}</p>
+      </div>
+    </div>
 
-<ul>
-    <li>{{ i.uid }}</li>
-    <li>{{ i.isbn }}</li>
-    <li>{{ i.review }}</li>
-</ul>
+    <div></div>
+  </div>
 
-{% endfor %}
 
-{% endblock content %}
+{% endblock top %}
+
+
+{% block mainCon %}
+
+
+<div class="main-container">
+    <div class="post-review">
+      <div class="avatar-container">
+        <img
+          class="avatar"
+          src="https://picsum.photos/200/200"
+          alt="Avatar"
+        />
+      </div>
+      <div class="review-form-container">
+        <form action="" method="POST" class="review-form">
+
+            {{ form.hidden_tag() }}
+
+            {{ form.review(class_="review-field") }}
+
+            {{ form.submit(class_="submitButton") }}
+
+            </form>
+
+      </div>
+    </div>
+
+    {% with messages = get_flashed_messages()  %}
+            {% if messages %}
+
+            {% for message in messages %}
+            <div class="error-text">{{ message }}</div>
+            {% endfor %}
+
+
+            {% endif %}
+            {% endwith %}
+
+
+
+
+    <h2>Reviews</h2>
+
+    <div class="review-list" >
+
+      {% for i in allReviews  %}
+
+
+
+      <div class="avatar-container" style="padding-top: 10px;">
+        <img
+          class="avatar"
+          src="https://picsum.photos/200/200"
+          alt="Avatar"
+        />
+      </div>
+      <div class="user-review">
+        <h5>John Doe</h5>
+        <p>{{ i.review }}</p>
+      </div>
+
+      {% endfor %}
+    </div>
+  </div>
+
+
+{% endblock mainCon %}

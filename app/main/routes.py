@@ -2,6 +2,7 @@ from flask import render_template, redirect, flash, url_for, request, current_ap
 from flask_login import current_user, login_user, logout_user
 from werkzeug.utils import secure_filename
 from app.main import bp
+from sqlalchemy import and_
 from app.models import Book, Review
 from app.main.forms import ImportForm, ReviewForm
 import os, requests
@@ -13,7 +14,7 @@ def index():
 
     if current_user.is_anonymous:
         user='Stranger'
-    else:   
+    else:
         user= current_user.username
     return render_template('index.html', name=user)
 
@@ -22,10 +23,11 @@ def book(isbn):
     grParams = {'isbns': isbn , 'key':os.environ['GOODREADS_API_KEY']}
     ratings = requests.get('https://www.goodreads.com/book/review_counts.json', params=grParams)
     stars = ratings.json()['books'][0]['average_rating']
+    ratingscount = ratings.json()['books'][0]['ratings_count']
 
     form = ReviewForm()
     if form.validate_on_submit():
-        preventSecondReview = Review.query.filter(Review.uid==current_user.id).first()
+        preventSecondReview = Review.query.filter(and_(Review.uid==current_user.id, Review.isbn==isbn)).first()
         if preventSecondReview is not None:
             flash('You cannot post two reviews!')
         else:
@@ -33,9 +35,9 @@ def book(isbn):
             db.session.add(review)
             db.session.commit()
 
-    bookTitle = Book.query.filter(Book.isbn==isbn).first()
+    book = Book.query.filter(Book.isbn==isbn).first()
     allReviews = Review.query.filter(Review.isbn==isbn).all()
-    return render_template('book.html', form=form, allReviews=allReviews, bookTitle=bookTitle, stars=stars)
+    return render_template('book.html', form=form, allReviews=allReviews, book=book, stars=stars, ratingscount=ratingscount)
 
 @bp.route('/user/<username>')
 def user(username):
@@ -65,8 +67,3 @@ def import_csv():
 
 #
 #         return 'File Upload Success'
-
-
-
-
-

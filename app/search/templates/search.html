@@ -1,48 +1,80 @@
-{% extends 'base.html' %}
+{% extends '_app.html' %}
 
-{% block content %}
+{% block top_section %}
+
+<div class="search-container">
 
 <form action="" method="POST">
+    <img src="static/images/search.png" alt="" class="srch-icon">
 
     {{ form.hidden_tag() }}
 
-    <p>{{ form.searchQuery.label }}<br>
-        {{ form.searchQuery }}<br>
+        {{ form.searchQuery(class_="srch-input", placeholder="Search by ISBN, Author or Book Title") }}<br>
         {% for error in form.searchQuery.errors  %}
         [ {{ error }} ]
         {% endfor %}
-    </p>
-
-    <p>{{ form.submit() }}</p>
 
 </form>
-<hr>
 
-{% for i in results  %}
+</div>
+{% endblock top_section %}
 
-<ul>
-    <li>ISBN: {{ i.isbn }}</li>
-    <li>Author: {{ i.author }}</li>
-    <li>Title: {{ i.title }}</li>
-</ul>
+{% block container %}
+
+<div class="main-container">
+    <div class="cards">
+        {% for i in results  %}
+
+            <div class="card">
+              <div class="card-title">
+                <p class="book-name">{{ i.title }}</p>
+
+              </div>
+
+              <div class="card-content">
+                <div class="book-info">
+                    <p id="rating-title">Author</p>
+                  <p class="author-name">{{ i.author }}</p>
+
+
+                </div>
+                <div class="book-rating">
+                  <p id="rating-title">Year</p>
+                  <p class="rating">{{ i.year }}</p>
+                </div>
+              </div>
+              <a href="{{ url_for('main.book', isbn=i.isbn) }}" class="card-link">
+                <div class="card-cta">
+                    More Info
+                </div></a>
+
+        </div>
+
+
+
 {% endfor %}
-<!-- {% for i in author  %}
 
-<ul>
-    <li>ISBN: {{ i.isbn }}</li>
-    <li>Author: {{ i.author }}</li>
-    <li>Title: {{ i.title }}</li>
-</ul>
-{% endfor %}
-{% for i in titles  %}
-
-<ul>
-    <li>ISBN: {{ i.isbn }}</li>
-    <li>Author: {{ i.author }}</li>
-    <li>Title: {{ i.title }}</li>
-</ul>
+</div>
 
 
 
-{% endfor %} -->
-{% endblock content %}
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock container %}
